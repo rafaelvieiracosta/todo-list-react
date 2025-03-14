@@ -1,0 +1,12 @@
+* {
+  font-family: "Inter", sans-serif;
+}
+
+:focus-visible {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--purple_dark);
+}
+
+body {
+  background-color: var(--gray_600);
+}
