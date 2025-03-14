@@ -2,7 +2,7 @@
   font-family: "Inter", sans-serif;
 }
 
-:focus-visible {
+:focus-visible:not(input) {
   outline: transparent;
   box-shadow: 0 0 0 2px var(--purple_dark);
 }
