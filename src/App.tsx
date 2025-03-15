@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Header } from "./components/Header/Header.tsx";
-import { Task } from "./components/Task/Task.tsx";
+import { TaskList } from "./components/TaskList/TaskList.tsx";
 
 import { TaskInterface } from "./interfaces.tsx";
 
@@ -34,18 +34,14 @@ export function App() {
   return (
     <>
       <Header onCreateTask={createTask} />
-      <h1>todo list</h1>
 
-      {tasks.map((task: TaskInterface) => {
-        return (
-          <Task
-            key={task.id}
-            task={task}
-            onDeleteTask={deleteTask}
-            onToggleCompleteTask={toggleCompleteTask}
-          />
-        );
-      })}
+      <main>
+        <TaskList
+          tasks={tasks}
+          onDeleteTask={deleteTask}
+          onToggleCompleteTask={toggleCompleteTask}
+        />
+      </main>
     </>
   );
 }

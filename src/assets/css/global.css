@@ -9,4 +9,5 @@
 
 body {
   background-color: var(--gray_600);
+  -webkit-font-smoothing: antialiased;
 }

@@ -1,0 +1,6 @@
+.task-list__list {
+  margin-top: 1.5rem;
+}
+.task-list__list li + li {
+  margin-top: 0.75rem;
+}

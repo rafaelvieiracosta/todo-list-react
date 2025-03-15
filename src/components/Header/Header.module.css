@@ -58,7 +58,7 @@
   transition: background-color 150ms;
 }
 .header__form__button:hover {
-  background-color: color-mix(in hsl, var(--blue_dark), white 10%);
+  background-color: var(--blue);
 }
 .header__form__button:disabled {
   cursor: not-allowed;
