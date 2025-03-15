@@ -27,7 +27,7 @@
   flex: 1;
   background-color: var(--gray_500);
   border: 1px solid var(--gray_700);
-  padding: 1rem;
+  padding: 0.938rem;
   border-radius: 8px;
   outline: none;
 
@@ -46,7 +46,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 8px;
   background-color: var(--blue_dark);
 
@@ -59,4 +59,8 @@
 }
 .header__form__button:hover {
   background-color: color-mix(in hsl, var(--blue_dark), white 10%);
+}
+.header__form__button:disabled {
+  cursor: not-allowed;
+  background-color: color-mix(in hsl, var(--blue_dark), black 10%);
 }
