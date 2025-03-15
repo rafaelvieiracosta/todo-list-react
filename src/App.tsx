@@ -1,19 +1,31 @@
 import { useState } from "react";
 
 import { Header } from "./components/Header/Header.tsx";
+import { Task } from "./components/Task/Task.tsx";
 
-import { Task } from "./interfaces.tsx";
+import { TaskInterface } from "./interfaces.tsx";
 
 export function App() {
-  const [tasks, setTasks] = useState<Task[]>;
+  const [tasks, setTasks] = useState<TaskInterface[]>([]);
 
-  function createTask(newTask: Task) {
+  function createTask(newTask: TaskInterface) {
     setTasks([...tasks, newTask]);
   }
 
   function deleteTask(taskID: number) {
-    const remainingTasks = tasks.filter((task: Task) => {
+    const remainingTasks = tasks.filter((task: TaskInterface) => {
       return task.id !== taskID;
+    });
+
+    setTasks(remainingTasks);
+  }
+
+  function toggleCompleteTask(taskID: number) {
+    const remainingTasks = tasks.map((task: TaskInterface) => {
+      return {
+        ...task,
+        isCompleted: task.id === taskID ? !task.isCompleted : task.isCompleted,
+      };
     });
 
     setTasks(remainingTasks);
@@ -23,6 +35,17 @@ export function App() {
     <>
       <Header onCreateTask={createTask} />
       <h1>todo list</h1>
+
+      {tasks.map((task: TaskInterface) => {
+        return (
+          <Task
+            key={task.id}
+            task={task}
+            onDeleteTask={deleteTask}
+            onToggleCompleteTask={toggleCompleteTask}
+          />
+        );
+      })}
     </>
   );
 }

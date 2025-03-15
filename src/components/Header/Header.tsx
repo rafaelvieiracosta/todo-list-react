@@ -4,10 +4,10 @@ import { IconLogo } from "../Icons/IconLogo";
 import { IconPlus } from "../Icons/IconPlus";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { Task } from "../../interfaces.tsx";
+import { TaskInterface } from "../../interfaces.tsx";
 
 interface HeaderProps {
-  onCreateTask: (task: Task) => void;
+  onCreateTask: (task: TaskInterface) => void;
 }
 
 export function Header({ onCreateTask }: HeaderProps) {
@@ -21,13 +21,16 @@ export function Header({ onCreateTask }: HeaderProps) {
     event.preventDefault();
 
     onCreateTask({
-      id: new Date().getTime() + Math.random(),
+      id: new Date().getTime() + Math.floor(Math.random() * 1000),
       text: newTaskText,
       isCompleted: false,
     });
+
+    setNewTaskText("");
   }
 
   const isNewTaskTextEmpty = newTaskText.trim() === "";
+
   return (
     <header className={styles.header}>
       <div className={styles.header__logo}>
