@@ -31,16 +31,19 @@ export function TaskListItem({
     return event.key === "Enter" || event.key === " ";
   }
 
-  function handleKeyDownTaskItem(event: KeyboardEvent<HTMLDivElement>) {
-    if (isEnterOrSpaceKey(event)) {
-      event.preventDefault();
-      onToggleCompleteTask(task.id);
-    }
-  }
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (!isEnterOrSpaceKey(event)) return;
 
-  function handleKeyDownDeleteButton(event: KeyboardEvent<HTMLButtonElement>) {
-    if (isEnterOrSpaceKey(event)) {
+    event.preventDefault();
+
+    const isDeleteButtonFocused =
+      document.activeElement === event.currentTarget.querySelector("button");
+
+    if (isDeleteButtonFocused) {
       event.stopPropagation();
+      onDeleteTask(task.id);
+    } else {
+      onToggleCompleteTask(task.id);
     }
   }
 
@@ -51,7 +54,7 @@ export function TaskListItem({
         ${task.isCompleted && styles.completed}
       `}
       onClick={handleToggleCompleteTask}
-      onKeyDown={handleKeyDownTaskItem}
+      onKeyDown={handleKeyDown}
       tabIndex={0}
     >
       <div className={styles["task-list-item__checkbox-wrapper"]}>
@@ -65,7 +68,6 @@ export function TaskListItem({
       <button
         className={styles["task-list-item__button"]}
         onClick={handleDeleteTask}
-        onKeyDown={handleKeyDownDeleteButton}
       >
         <IconTrash />
       </button>
