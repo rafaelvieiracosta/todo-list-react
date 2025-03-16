@@ -1,0 +1,28 @@
+.task-list-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.task-list-header__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.task-list-header__item.item--tasks-created {
+  color: var(--blue);
+}
+.task-list-header__item.item--completed {
+  color: var(--purple);
+}
+.task-list-header__item__number {
+  border-radius: 999px;
+  padding: 2px 8px;
+  background-color: var(--gray_400);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--gray_200);
+}

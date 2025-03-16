@@ -3,6 +3,7 @@ import styles from "./TaskList.module.css";
 import { TaskInterface } from "../../interfaces";
 
 import { TaskListHeader } from "./TaskListHeader/TaskListHeader";
+import { TaskListEmptyState } from "./TaskListEmptyState/TaskListEmptyState";
 import { TaskListItem } from "./TaskListItem/TaskListItem";
 
 export interface TaskListProps {
@@ -18,21 +19,24 @@ export function TaskList({
 }: TaskListProps) {
   return (
     <div className={styles["task-list"]}>
-      <TaskListHeader />
+      <TaskListHeader tasks={tasks} />
 
-      <ul className={styles["task-list__list"]}>
-        {tasks.map((task) => {
-          return (
-            <li>
-              <TaskListItem
-                task={task}
-                onDeleteTask={onDeleteTask}
-                onToggleCompleteTask={onToggleCompleteTask}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      {!tasks.length && <TaskListEmptyState />}
+      {tasks.length > 0 && (
+        <ul className={styles["task-list__list"]}>
+          {tasks.map((task) => {
+            return (
+              <li key={task.id}>
+                <TaskListItem
+                  task={task}
+                  onDeleteTask={onDeleteTask}
+                  onToggleCompleteTask={onToggleCompleteTask}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

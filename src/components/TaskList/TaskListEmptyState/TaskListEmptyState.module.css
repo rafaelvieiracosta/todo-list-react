@@ -1,0 +1,24 @@
+.task-list-empty-state {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid var(--gray_400);
+  border-radius: 8px;
+  padding: 64px 24px;
+}
+.task-list-empty-state__title {
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--gray_300);
+  text-align: center;
+}
+.task-list-empty-state__description {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--gray_300);
+  text-align: center;
+}

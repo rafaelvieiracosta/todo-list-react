@@ -1,3 +1,5 @@
+import { MouseEvent, KeyboardEvent } from "react";
+
 import styles from "./TaskListItem.module.css";
 
 import { TaskInterface } from "../../../interfaces";
@@ -16,12 +18,30 @@ export function TaskListItem({
   onDeleteTask,
   onToggleCompleteTask,
 }: TaskListItemProps) {
-  function handleDeleteTask() {
+  function handleDeleteTask(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
     onDeleteTask(task.id);
   }
 
   function handleToggleCompleteTask() {
     onToggleCompleteTask(task.id);
+  }
+
+  function isEnterOrSpaceKey(event: KeyboardEvent) {
+    return event.key === "Enter" || event.key === " ";
+  }
+
+  function handleKeyDownTaskItem(event: KeyboardEvent<HTMLDivElement>) {
+    if (isEnterOrSpaceKey(event)) {
+      event.preventDefault();
+      onToggleCompleteTask(task.id);
+    }
+  }
+
+  function handleKeyDownDeleteButton(event: KeyboardEvent<HTMLButtonElement>) {
+    if (isEnterOrSpaceKey(event)) {
+      event.stopPropagation();
+    }
   }
 
   return (
@@ -31,6 +51,8 @@ export function TaskListItem({
         ${task.isCompleted && styles.completed}
       `}
       onClick={handleToggleCompleteTask}
+      onKeyDown={handleKeyDownTaskItem}
+      tabIndex={0}
     >
       <div className={styles["task-list-item__checkbox-wrapper"]}>
         <div className={styles["task-list-item__checkbox"]}>
@@ -43,6 +65,7 @@ export function TaskListItem({
       <button
         className={styles["task-list-item__button"]}
         onClick={handleDeleteTask}
+        onKeyDown={handleKeyDownDeleteButton}
       >
         <IconTrash />
       </button>
